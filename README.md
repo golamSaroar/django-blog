@@ -1,4 +1,4 @@
-# Admin Controlled Blog
+# Simple Django Blog
 
 This is a simple blog made with Django 1.11 and Bootstrap 4.  
 You need to be a [Superuser](https://djangocentral.com/creating-super-user-in-django/) to create an (admin) account. Only admins can create new posts. Anyone can read posts and comment on them, but comments appear on the site only after admin's approval.
