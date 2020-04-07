@@ -13,17 +13,26 @@ a, .btn-link {
 }
 
 a:hover, .btn-link:hover {
-    color: #000;
+    color: #043927;
     text-decoration: none;
 }
 
 .container {
     max-width: 800px;
+    padding-top: 75px;
 }
 
 .brand-bg {
-    background-color: #01796F !important;
+    background-color: #043927 !important;
     color: #fff !important;
+}
+
+.navbar .nav-link {
+    color: #fff !important;
+}
+
+.navbar .nav-link:hover{
+    color: rgba(255,255,255,.75) !important;
 }
 
 .form-control {
