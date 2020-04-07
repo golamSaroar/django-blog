@@ -1,14 +1,19 @@
 {% extends 'blog/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
-    <h1>New post</h1>
 
-    <form method="POST" class="post-form">
+<div class="jumbotron">
+    <h3>New Post</h3>
+    <hr>
+    <form method="POST">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" class="save btn btn-default">Save</button>
+        {{form|crispy}}
+        <button type="submit" class="btn brand-bg">Save</button>
     </form>
+</div>
 
-    <script>var editor = new MediumEditor('.editable');</script>
+<script>var editor = new MediumEditor('.editable');</script>
 
 {% endblock %}

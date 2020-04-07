@@ -1,8 +1,14 @@
 {% extends "blog/base.html" %}
 {% block content %}
-  <form action="" method="post">
-    {% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input class='btn btn-danger' type="submit" value="Confirm" />
-  </form>
+
+<div class="jumbotron">
+    <h3>Delete Post</h3>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <button class='btn btn-danger'>Confirm</button>
+    </form>
+</div>
+
 {% endblock %}

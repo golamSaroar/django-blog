@@ -1,20 +1,54 @@
 {% extends 'blog/base.html' %}
-
+{% load static %}
+{% load myfilters %}
 {% block content %}
 
-<div class="centerstage">
+<h3>Posts</h3>
+<hr>
 
-    {% for post in post_list %}
-    <div class="post">
-        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
-        <div class="date">
-            <p>Published on: {{post.published|date:"D M Y"}}</p>
-        </div>
-        <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.approve_comments.count}}</a>
-    </div>
+{% for post in post_list %}
 
-    {% endfor %}
+<div class="box">
+	<div class="user-block">
+		<img class="rounded-circle mt-2" src="{% static 'images/avatar.png' %}" alt="User Image">
+		<div class="ml-5">
+			<a href="{% url 'post_detail' pk=post.pk %}">
+				<span class="title d-block">{{post.title}}</span>
+			</a>
+			<span class="text-muted small">
+				by {{post.author}}, published on {{post.published_date|date:"D M Y"}}
+			</span>
+		</div>
+	</div><!-- /.user-block -->
+	<div class="post-block py-3">
+		<div class="post-body">
+			{{post.text|safe|linebreaksbr|truncatewords:50}}
+		</div>
+		<div class="comment-count">
+			<div class="float-left">
+				<a href="{% url 'post_detail' pk=post.pk %}">
+				{% if post.approve_comments.count == 0 %}
+					No comments
+				{% else %}
+					{{post.approve_comments.count}} comment{{post.approve_comments.count|pluralize}}
+				{% endif %}
+				</a>
+			</div>
+			{% if user.is_authenticated and post.approve_comments.count < post.comments.count %}
+			<div class="float-right">
+				<a href="{% url 'post_detail' pk=post.pk %}">
+					{{post.comments.count|subtract:post.approve_comments.count}} 
+					comment{{post.comments.count|subtract:post.approve_comments.count|pluralize}} pending review.
+				</a>
+			</div>
+			{% endif %}
+		</div>
+	</div> <!-- ./post-block -->
+</div>    
 
-</div>
+{% empty %}
+<p>There is no published post at this moment!</p>
+
+{% endfor %}
 
 {% endblock content %}
